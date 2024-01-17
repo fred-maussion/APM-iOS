@@ -1,8 +1,23 @@
-# iOS Installation
+# Quick start iOS Elastic APM Demo
 
-[TOC]
+<!-- vscode-markdown-toc -->
+* 1. [Install XCode](#InstallXCode)
+* 2. [Demo application](#Demoapplication)
+	* 2.1. [Download the application repository](#Downloadtheapplicationrepository)
+	* 2.2. [Select the destination build](#Selectthedestinationbuild)
+	* 2.3. [Add the APM Dependency](#AddtheAPMDependency)
+	* 2.4. [Build the application](#Buildtheapplication)
+* 3. [Additional Notes](#AdditionalNotes)
+	* 3.1. [Change iOS version or device](#ChangeiOSversionordevice)
+* 4. [Reference](#Reference)
 
-## Install XCode
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->
+
+##  1. <a name='InstallXCode'></a>Install XCode
 
 In order to showcase the RUM integration within iOS, we will leverage iOS XCode simulator capabilities to emulate an iOS environment.
 
@@ -14,9 +29,9 @@ Please follow the following steps:
 
 We have the requirements to show case the RUM integration.
 
-## Demo application
+##  2. <a name='Demoapplication'></a>Demo application
 
-### Download the application repository
+###  2.1. <a name='Downloadtheapplicationrepository'></a>Download the application repository
 
 First download the application from the following repository
 
@@ -26,7 +41,7 @@ git clone git@github.com:fred-maussion/MovieSwiftUI
 
 Open the downloaded repository in XCode.
 
-### Select the destination build
+###  2.2. <a name='Selectthedestinationbuild'></a>Select the destination build
 
 In this demo we are going to use the simulator to showcase our instrumented application, so for this select the expect iOS simulator device version you want to. For this go to "product" -> Destination -> iPhone 15 and it will download the latest runtime version of iOS for iPhone15.
 
@@ -36,7 +51,7 @@ Now you can build the project by hitting the play button at the top.
 
 The first time you build the project it will complain that the version of the project is old and ask to update it. You can safely do it.
 
-### Add the APM Dependency
+###  2.3. <a name='AddtheAPMDependency'></a>Add the APM Dependency
 
 Now the application is building, we are going to add the Elastic APM package as a dependency in our project. For this you will have to update Package dependencies under repositoy project:
 MovieSwift -> Packages -> UI -> Package.swift
@@ -124,14 +139,14 @@ struct HomeView: App {
     // End Elastic Modification
 ```
 
-### Build the application
+###  2.4. <a name='Buildtheapplication'></a>Build the application
 
 Finally you can build the application again who will be updated to your simulator device.
 Perform a couple of action and you will see the traces appears on the APM of your ESS deployement. 
 
-## Additional Notes
+##  3. <a name='AdditionalNotes'></a>Additional Notes
 
-### Change iOS version or device
+###  3.1. <a name='ChangeiOSversionordevice'></a>Change iOS version or device
 
 If you want to change your iOS version or device, before you build, your need to go to:
 Product -> Destination -> Manage Destination -> Select the device you want to build on.
@@ -139,6 +154,8 @@ Product -> Destination -> Manage Destination -> Select the device you want to bu
 Now if you want to change the version of a device, your need to go to:
 Product -> Destination -> Manage Destination -> Hit "+" and select the Device + OS Version you want to test on.
 
-## Reference
+You can also use your personal iPhone if you have one, you will need to enable the [developper mode](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device)
+
+##  4. <a name='Reference'></a>Reference
 
 - [Apple Simulator](https://developer.apple.com/documentation/xcode/installing-your-app-in-many-simulator-platforms-and-versions)
