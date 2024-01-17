@@ -114,6 +114,7 @@ import SwiftUI
 import SwiftUIFlux
 // Elastic Modification : import module
 import ElasticApm
+import MetricKit
 // End Elastic Modification
 
 // MARK:- Shared View
@@ -124,6 +125,7 @@ let store = Store<AppState>(reducer: appStateReducer,
 // Elastic Modification : Setup the configuration of the iOS Elastic Agent APM
 class AppDelegate : NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // Elastic APM
         if let serverURLString = Bundle.main.object(forInfoDictionaryKey: "APM_SERVER_URL") as? String, let secretToken = Bundle.main.object(forInfoDictionaryKey: "APM_TOKEN") as? String {
             if let serverURL = URL(string: serverURLString) {
                 let config = AgentConfigBuilder()
@@ -134,6 +136,11 @@ class AppDelegate : NSObject, UIApplicationDelegate {
                 ElasticApmAgent.start(with: config)
             }
         }
+        // End Elastic APM
+        // MetricKit implementation
+        let metricManager = MXMetricManager.shared
+        metricManager.add(self)
+        // End MetricKit implementation
         return true
     }
 }
@@ -171,7 +178,7 @@ OTEL_RESOURCE_ATTRIBUTES : deployment.environment=production,service.name="Elast
 
 ![IOS APM Agent Configuration](Resources/images/how-to-ios-image-3.png)
 
-Now let's build the application again who will be updated to your simulator device and perform a couple of action. You will see the traces appear in the APM feature of your ESS deployement.
+Now let's build the application again who will be updated to your simulator device and perform a couple of action. You will see the traces appear in the APM feature of your ESS deployement and the metrics from the iPhone will be in your _metrics-apm.app*_ index
 
 ##  4. <a name='AdditionalNotes'></a>Additional Notes
 
