@@ -7,7 +7,8 @@
 		* 2.1.1. [Download the application repository](#Downloadtheapplicationrepository)
 		* 2.1.2. [Select the destination build](#Selectthedestinationbuild)
 		* 2.1.3. [Add the APM Dependency](#AddtheAPMDependency)
-	* 2.2. [ Use instrumented version](#Useinstrumentedversion)
+	* 2.2. [Make the application crash](#Maketheapplicationcrash)
+	* 2.3. [ Use instrumented version](#Useinstrumentedversion)
 * 3. [Configure & Build the application](#ConfigureBuildtheapplication)
 * 4. [Additional Notes](#AdditionalNotes)
 	* 4.1. [Change iOS version or device](#ChangeiOSversionordevice)
@@ -152,7 +153,26 @@ struct HomeView: App {
     // End Elastic Modification
 ```
 
-###  2.2. <a name='Useinstrumentedversion'></a> Use instrumented version
+###  2.2. <a name='Maketheapplicationcrash'></a> Make the application crash
+
+In order to grab the crash stacktrace you can apply the following modification to make the application crash when clicking the _fan Club_ option located on the tab at the bottom of the app.
+
+Change the following code :
+MovieSwift -> MovieSwift -> views -> components -> fan club -> FanClubHome
+
+And modify the code to reflect the following changes as per _Elastic Modification Comments_:
+
+```swift
+...
+   func map(state: AppState , dispatch: @escaping DispatchFunction) -> Props {
+        // Elastic Modification : Crach the application on click   
+        fatalError("A Crash!")  
+        // End Elastic Modification
+        Props(peoples: state.peoplesState.fanClub.map{
+...
+```
+
+###  2.3. <a name='Useinstrumentedversion'></a> Use instrumented version
 
 You can leverage the existing code and just build and configure the demo app without going through the above manual modification process.
 For this, you can clone the following repository which contains already the above modifications:
